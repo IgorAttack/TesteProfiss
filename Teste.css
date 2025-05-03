@@ -192,18 +192,18 @@ h1 {
     transform: translateY(1px);
 }
 
-/* Estilo específico para o botão Refazer Teste */
+//* Estilo específico para o botão Refazer Teste */
 #botoesFinal button:first-child {
-    background-color: #b0e0e6; /* Azul acinzentado claro com um toque de verde (PowderBlue) */
-    color: #2e8b57; /* Verde marinho médio (SeaGreen) para contraste */
+    background-color: #ff0000; /* Vermelho */
+    color: #ffffff; /* Branco */
 }
 
 #botoesFinal button:first-child:hover {
-    background-color: #add8e6; /* Azul claro (LightBlue) */
+    background-color: #cc0000; /* Vermelho mais escuro */
 }
 
 #botoesFinal button:first-child:active {
-    background-color: #87ceeb; /* Azul celeste (SkyBlue) */
+    background-color: #aa0000; /* Vermelho ainda mais escuro */
     transform: translateY(1px);
 }
 
