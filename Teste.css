@@ -1,0 +1,254 @@
+/* Fundo geral da página com gradiente */
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1b5e20, #4caf50);
+    font-family: 'Arial', sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column; /* Alinha os itens verticalmente no body */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Título fora do container */
+h1 {
+    font-size: 36px; /* Mantenha o tamanho da fonte */
+    color: white; /* Garante que a cor do texto seja branca */
+    text-align: center; /* Centraliza o texto horizontalmente */
+    margin-top: 30px; /* Adiciona uma margem no topo para afastá-lo da borda da página */
+    margin-bottom: 20px; /* Adiciona uma margem abaixo para separá-lo do container */
+}
+
+/* Container principal do teste */
+.container {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 30px; /* Reduzi um pouco o padding geral */
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 700px; /* Aumentei um pouco a largura máxima */
+    width: 95%; /* Aumentei a largura para ocupar mais espaço */
+}
+
+/* Barra de progresso */
+#barraProgressoContainer {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin: 20px 0; /* Aumentei a margem vertical da barra */
+    height: 25px; /* Aumentei a altura da barra */
+    overflow: hidden;
+}
+
+#barraProgresso {
+    background-color: #66bb6a;
+    height: 100%;
+    width: 0%;
+    border-radius: 10px;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Texto de progresso */
+#progressoTexto {
+    font-size: 18px; /* Aumentei a fonte do texto de progresso */
+    margin-top: 8px;
+}
+
+/* Pergunta */
+#pergunta {
+    font-size: 24px; /* Aumentei a fonte da pergunta */
+    margin-bottom: 30px; /* Aumentei a margem inferior da pergunta */
+}
+
+/* Opções de resposta */
+#opcoes {
+    display: flex;
+    justify-content: center; /* Centraliza os botões horizontalmente */
+    flex-wrap: wrap; /* Permite que os botões quebrem para a próxima linha */
+    gap: 15px; /* Aumentei o espaçamento entre os botões */
+    margin-bottom: 35px; /* Aumentei a margem inferior das opções */
+}
+
+/* Botões de resposta */
+.botao-resposta {
+    background-color: #81c784;
+    border: none;
+    padding: 14px 22px; /* Aumentei o padding dos botões */
+    font-size: 18px; /* Aumentei a fonte dos botões */
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+    width: auto; /* Largura automática para ficarem lado a lado */
+    min-width: 160px; /* Aumentei a largura mínima dos botões */
+    box-sizing: border-box;
+}
+
+.botao-resposta:hover {
+    background-color: #66bb6a;
+    transform: translateY(-2px);
+}
+
+.botao-resposta:active {
+    background-color: #388e3c;
+    transform: translateY(1px);
+}
+
+.botao-resposta.botao-selecionado {
+    background-color: #388e3c;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Botão "Avançar" */
+#botaoAvancar {
+    background-color: #43a047;
+    border: none;
+    padding: 14px 22px; /* Aumentei o padding do botão Avançar */
+    margin-top: 25px; /* Aumentei a margem superior do botão Avançar */
+    font-size: 18px; /* Aumentei a fonte do botão Avançar */
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+    width: auto; /* Largura automática para centralizar */
+    display: none; /* Inicialmente oculto */
+    min-width: 180px; /* Aumentei a largura mínima do botão Avançar */
+    margin-left: auto;
+    margin-right: auto;
+    display: block; /* Para visualização inicial, lembre-se que o JS controla a exibição */
+}
+
+#botaoAvancar:hover {
+    background-color: #388e3c;
+    transform: translateY(-2px);
+}
+
+#botaoAvancar:active {
+    background-color: #2e7d32;
+    transform: translateY(1px);
+}
+
+/* Título do resultado */
+#resultadoTitulo {
+    font-size: 28px; /* Aumentei a fonte do título do resultado */
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* Texto do resultado */
+#resultado {
+    font-size: 20px; /* Aumentei a fonte do texto do resultado */
+    margin-bottom: 30px;
+}
+
+/* Estilos para os botões finais (Refazer Teste e Concluir) */
+#botoesFinal {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px; /* Adicionei um pouco mais de margem superior */
+}
+
+#botoesFinal button {
+    background-color: #fdd835; /* Um tom de amarelo para destaque */
+    border: none;
+    padding: 14px 22px;
+    font-size: 18px;
+    color: #212121; /* Cor do texto mais escura */
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+    min-width: 160px;
+}
+
+#botoesFinal button:hover {
+    background-color: #fbc02d; /* Tom de amarelo mais escuro no hover */
+    transform: translateY(-2px);
+}
+
+#botoesFinal button:active {
+    background-color: #f9a825; /* Tom de amarelo ainda mais escuro ao clicar */
+    transform: translateY(1px);
+}
+
+/* Estilo específico para o botão Refazer Teste (opcional - se quiser diferenciar) */
+#botoesFinal button:first-child {
+    background-color: #e57373; /* Um tom de vermelho mais claro */
+    color: white;
+}
+
+#botoesFinal button:first-child:hover {
+    background-color: #ef5350;
+}
+
+#botoesFinal button:first-child:active {
+    background-color: #e53935;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 700px) {
+    body {
+        padding-top: 20px; /* Adiciona um pouco de espaço no topo em telas menores */
+    }
+
+    h1 {
+        font-size: 30px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    #pergunta {
+        font-size: 20px;
+        margin-bottom: 25px;
+    }
+
+    #opcoes {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+
+    .botao-resposta {
+        min-width: auto;
+        width: 100%;
+        font-size: 16px;
+        padding: 12px 18px;
+    }
+
+    #botaoAvancar {
+        min-width: auto;
+        width: 100%;
+        font-size: 16px;
+        padding: 12px 18px;
+        margin-top: 20px;
+    }
+
+    #resultadoTitulo {
+        font-size: 26px;
+    }
+
+    #resultado {
+        font-size: 18px;
+    }
+
+    #botoesFinal {
+        margin-top: 25px;
+        flex-direction: column; /* Alinha os botões finais em coluna em telas menores */
+        align-items: stretch; /* Estica os botões finais para a largura */
+    }
+
+    #botoesFinal button {
+        min-width: auto;
+        width: 100%;
+        font-size: 16px;
+        padding: 12px 18px;
+    }
+}
