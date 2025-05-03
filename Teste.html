@@ -106,11 +106,11 @@
             if (indiceAtual < perguntas.length) {
                 document.getElementById("pergunta").innerText = perguntas[indiceAtual].texto;
                 document.getElementById("opcoes").innerHTML = `
-                    <button class="botao-resposta" onclick="registrarResposta(5, this)">Concordo totalmente</button>
-                    <button class="botao-resposta" onclick="registrarResposta(4, this)">Concordo</button>
-                    <button class="botao-resposta" onclick="registrarResposta(3, this)">Neutro</button>
-                    <button class="botao-resposta" onclick="registrarResposta(2, this)">Discordo</button>
-                    <button class="botao-resposta" onclick="registrarResposta(1, this)">Discordo totalmente</button>
+                    <button class="botao-resposta" onclick="registrarResposta(5, this)" data-valor-anterior="0">Concordo totalmente</button>
+                    <button class="botao-resposta" onclick="registrarResposta(4, this)" data-valor-anterior="0">Concordo</button>
+                    <button class="botao-resposta" onclick="registrarResposta(3, this)" data-valor-anterior="0">Neutro</button>
+                    <button class="botao-resposta" onclick="registrarResposta(2, this)" data-valor-anterior="0">Discordo</button>
+                    <button class="botao-resposta" onclick="registrarResposta(1, this)" data-valor-anterior="0">Discordo totalmente</button>
                 `;
                 // Remove a classe de seleção de todos os botões ao mostrar uma nova pergunta
                 let botoes = document.querySelectorAll(".botao-resposta");
@@ -121,25 +121,30 @@
         }
 
         function registrarResposta(valor, botao) {
-            if (!respostaSelecionada) {
-                let area = perguntas[indiceAtual].area;
+            let area = perguntas[indiceAtual].area;
 
-                if (!pontuacao[area]) {
-                    pontuacao[area] = 0;
-                }
+            // Remove a seleção anterior
+            let botoes = document.querySelectorAll(".botao-resposta");
+            botoes.forEach(btn => btn.classList.remove("botao-selecionado"));
 
-                pontuacao[area] += parseInt(valor);
+            // Adiciona a classe para destacar o botão selecionado
+            botao.classList.add("botao-selecionado");
 
-                // Remove a seleção anterior
-                let botoes = document.querySelectorAll(".botao-resposta");
-                botoes.forEach(btn => btn.classList.remove("botao-selecionado"));
-
-                // Adiciona a classe para destacar o botão selecionado
-                botao.classList.add("botao-selecionado");
-
-                document.getElementById("botaoAvancar").style.display = "block"; // Mostra o botão de avançar
-                respostaSelecionada = true; // Indica que uma resposta foi selecionada
+            if (!pontuacao[area]) {
+                pontuacao[area] = 0;
             }
+
+            // Recalcula a pontuação subtraindo a resposta anterior (se houver)
+            // e adicionando a nova resposta
+            let respostaAnterior = parseInt(botao.dataset.valorAnterior || 0);
+            pontuacao[area] -= respostaAnterior;
+            pontuacao[area] += parseInt(valor);
+
+            // Armazena o valor atual como o valor anterior para futuras mudanças
+            botao.dataset.valorAnterior = parseInt(valor);
+
+            document.getElementById("botaoAvancar").style.display = "block"; // Mostra o botão de avançar
+            respostaSelecionada = true; // Indica que uma resposta foi selecionada
         }
 
         function avancarPergunta() {
@@ -148,7 +153,7 @@
                 atualizarProgresso(); // Atualiza barra de progresso
                 mostrarPergunta(); // Exibe a próxima pergunta
             } else {
-                alert("Por favor, selecione uma resposta antes de avançar."); // Opcional: feedback ao usuário
+                alert("Por favor, selecione uma resposta antes de avançar.");
             }
         }
 
@@ -180,18 +185,19 @@
     </script>
 </head>
 <body>
-    <h1>Teste para Descoberta Profissional</h1> <div class="container">
+    <h1>Teste para Descoberta Profissional</h1>
+    <div class="container">
         <div id="barraProgressoContainer">
             <div id="barraProgresso"></div>
             <p id="progressoTexto">0% concluído</p>
         </div>
         <p id="pergunta">Você se interessa por sistemas elétricos inteligentes e automação.</p>
         <div id="opcoes">
-            <button class="botao-resposta" onclick="registrarResposta(5, this)">Concordo totalmente</button>
-            <button class="botao-resposta" onclick="registrarResposta(4, this)">Concordo</button>
-            <button class="botao-resposta" onclick="registrarResposta(3, this)">Neutro</button>
-            <button class="botao-resposta" onclick="registrarResposta(2, this)">Discordo</button>
-            <button class="botao-resposta" onclick="registrarResposta(1, this)">Discordo totalmente</button>
+            <button class="botao-resposta" onclick="registrarResposta(5, this)" data-valor-anterior="0">Concordo totalmente</button>
+            <button class="botao-resposta" onclick="registrarResposta(4, this)" data-valor-anterior="0">Concordo</button>
+            <button class="botao-resposta" onclick="registrarResposta(3, this)" data-valor-anterior="0">Neutro</button>
+            <button class="botao-resposta" onclick="registrarResposta(2, this)" data-valor-anterior="0">Discordo</button>
+            <button class="botao-resposta" onclick="registrarResposta(1, this)" data-valor-anterior="0">Discordo totalmente</button>
         </div>
         <button id="botaoAvancar" onclick="avancarPergunta()" style="display:none;">Avançar</button>
         <div id="resultadoTitulo" style="display:none;"><h2>Resultado:</h2></div>
