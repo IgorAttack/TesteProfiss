@@ -2,7 +2,15 @@
 body {
     margin: 0;
     min-height: 100vh;
-    background: linear-gradient(135deg, #1b5e20, #4caf50);
+    background: linear-gradient(
+        135deg,
+        #005e03,
+        #0a7610,
+        #006705,
+        #2e8e174b
+    );
+    background-size: 200% 200%;
+    animation: gradientAnimation 10s ease infinite;
     font-family: 'Arial', sans-serif;
     color: white;
     display: flex;
@@ -15,29 +23,33 @@ body {
 h1 {
     font-size: 36px; /* Mantenha o tamanho da fonte */
     color: white; /* Garante que a cor do texto seja branca */
-    text-align: center; /* Centraliza o texto horizontalmente */
-    margin-top: 30px; /* Adiciona uma margem no topo para afastá-lo da borda da página */
-    margin-bottom: 20px; /* Adiciona uma margem abaixo para separá-lo do container */
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 /* Container principal do teste */
 .container {
     background-color: rgba(0, 0, 0, 0.2);
-    padding: 30px; /* Reduzi um pouco o padding geral */
+    padding: 30px;
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     text-align: center;
-    max-width: 700px; /* Aumentei um pouco a largura máxima */
-    width: 95%; /* Aumentei a largura para ocupar mais espaço */
+    max-width: 700px;
+    width: 95%;
 }
 
 /* Barra de progresso */
 #barraProgressoContainer {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    margin: 20px 0; /* Aumentei a margem vertical da barra */
-    height: 25px; /* Aumentei a altura da barra */
+    margin: 20px 0;
+    height: 25px;
     overflow: hidden;
+    position: relative; /* Para posicionar o texto dentro */
+    display: flex; /* Adicionado para alinhar os itens */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
 }
 
 #barraProgresso {
@@ -46,57 +58,64 @@ h1 {
     width: 0%;
     border-radius: 10px;
     transition: width 0.3s ease-in-out;
+    position: absolute; /* Garante que a barra fique atrás do texto se necessário */
+    top: 0;
+    left: 0;
+    z-index: 1; /* Garante que a barra fique atrás do texto */
 }
 
 /* Texto de progresso */
 #progressoTexto {
     font-size: 18px; /* Aumentei a fonte do texto de progresso */
-    margin-top: 8px;
+    color: white; /* Cor do texto para branco */
+    position: relative; /* Para ficar sobre a barra */
+    z-index: 2; /* Garante que o texto fique na frente da barra */
 }
 
 /* Pergunta */
 #pergunta {
-    font-size: 24px; /* Aumentei a fonte da pergunta */
-    margin-bottom: 30px; /* Aumentei a margem inferior da pergunta */
+    font-size: 24px;
+    margin-bottom: 30px;
 }
 
 /* Opções de resposta */
 #opcoes {
     display: flex;
-    justify-content: center; /* Centraliza os botões horizontalmente */
-    flex-wrap: wrap; /* Permite que os botões quebrem para a próxima linha */
-    gap: 15px; /* Aumentei o espaçamento entre os botões */
-    margin-bottom: 35px; /* Aumentei a margem inferior das opções */
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 35px;
 }
 
 /* Botões de resposta */
 .botao-resposta {
-    background-color: #81c784;
+    background-color: #aed581;
     border: none;
-    padding: 14px 22px; /* Aumentei o padding dos botões */
-    font-size: 18px; /* Aumentei a fonte dos botões */
-    color: white;
+    padding: 14px 10px;
+    font-size: 16px;
+    color: #333;
     cursor: pointer;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    transition: all 0.2s ease;
-    width: auto; /* Largura automática para ficarem lado a lado */
-    min-width: 160px; /* Aumentei a largura mínima dos botões */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease;
+    flex-grow: 1; /* Faz os botões crescerem para ocupar o espaço disponível */
+    min-width: 0; /* Permite que os botões encolham se necessário */
     box-sizing: border-box;
+    text-align: center;
 }
 
 .botao-resposta:hover {
-    background-color: #66bb6a;
-    transform: translateY(-2px);
+    background-color: #8bc34a;
 }
 
 .botao-resposta:active {
-    background-color: #388e3c;
+    background-color: #689f38; /* Verde ainda mais escuro ao clicar */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     transform: translateY(1px);
 }
 
 .botao-resposta.botao-selecionado {
-    background-color: #388e3c;
+    background-color: #4caf50;
+    color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -104,20 +123,20 @@ h1 {
 #botaoAvancar {
     background-color: #43a047;
     border: none;
-    padding: 14px 22px; /* Aumentei o padding do botão Avançar */
-    margin-top: 25px; /* Aumentei a margem superior do botão Avançar */
-    font-size: 18px; /* Aumentei a fonte do botão Avançar */
+    padding: 14px 22px;
+    margin-top: 25px;
+    font-size: 18px;
     color: white;
     cursor: pointer;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     transition: all 0.2s ease;
-    width: auto; /* Largura automática para centralizar */
-    display: none; /* Inicialmente oculto */
-    min-width: 180px; /* Aumentei a largura mínima do botão Avançar */
+    width: auto;
+    display: none;
+    min-width: 180px;
     margin-left: auto;
     margin-right: auto;
-    display: block; /* Para visualização inicial, lembre-se que o JS controla a exibição */
+    display: block;
 }
 
 #botaoAvancar:hover {
@@ -132,14 +151,14 @@ h1 {
 
 /* Título do resultado */
 #resultadoTitulo {
-    font-size: 28px; /* Aumentei a fonte do título do resultado */
+    font-size: 28px;
     margin-top: 30px;
     margin-bottom: 15px;
 }
 
 /* Texto do resultado */
 #resultado {
-    font-size: 20px; /* Aumentei a fonte do texto do resultado */
+    font-size: 20px;
     margin-bottom: 30px;
 }
 
@@ -148,15 +167,15 @@ h1 {
     display: flex;
     gap: 15px;
     justify-content: center;
-    margin-top: 30px; /* Adicionei um pouco mais de margem superior */
+    margin-top: 30px;
 }
 
 #botoesFinal button {
-    background-color: #fdd835; /* Um tom de amarelo para destaque */
+    background-color: #98fb98; /* Verde pálido brilhante (PaleGreen) */
     border: none;
     padding: 14px 22px;
     font-size: 18px;
-    color: #212121; /* Cor do texto mais escura */
+    color: #2f4f4f; /* Cinza esverdeado escuro (DarkSlateGray) para contraste */
     cursor: pointer;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
@@ -165,33 +184,34 @@ h1 {
 }
 
 #botoesFinal button:hover {
-    background-color: #fbc02d; /* Tom de amarelo mais escuro no hover */
-    transform: translateY(-2px);
+    background-color: #90ee90; /* Verde claro (LightGreen) um pouco mais intenso */
 }
 
 #botoesFinal button:active {
-    background-color: #f9a825; /* Tom de amarelo ainda mais escuro ao clicar */
+    background-color: #8fbc8f; /* Verde acinzentado suave (LightSeaGreen) */
     transform: translateY(1px);
 }
 
-/* Estilo específico para o botão Refazer Teste (opcional - se quiser diferenciar) */
+/* Estilo específico para o botão Refazer Teste */
 #botoesFinal button:first-child {
-    background-color: #e57373; /* Um tom de vermelho mais claro */
-    color: white;
+    background-color: #b0e0e6; /* Azul acinzentado claro com um toque de verde (PowderBlue) */
+    color: #2e8b57; /* Verde marinho médio (SeaGreen) para contraste */
 }
 
 #botoesFinal button:first-child:hover {
-    background-color: #ef5350;
+    background-color: #add8e6; /* Azul claro (LightBlue) */
 }
 
 #botoesFinal button:first-child:active {
-    background-color: #e53935;
+    background-color: #87ceeb; /* Azul celeste (SkyBlue) */
+    transform: translateY(1px);
 }
+
 
 /* Responsividade para telas menores */
 @media (max-width: 700px) {
     body {
-        padding-top: 20px; /* Adiciona um pouco de espaço no topo em telas menores */
+        padding-top: 20px;
     }
 
     h1 {
@@ -210,8 +230,8 @@ h1 {
     }
 
     #opcoes {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: column; /* Volta para coluna em telas menores */
+        align-items: stretch; /* Estica os botões para a largura */
         gap: 10px;
         margin-bottom: 30px;
     }
